@@ -1,4 +1,4 @@
-// import Footer from "../component/footer";
+import Footer from "./Footer";
 
 export default function PortalLayout({ children, customStyle }) {
   return (
