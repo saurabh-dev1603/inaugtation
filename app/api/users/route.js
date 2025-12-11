@@ -1,6 +1,72 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { users } from '@/lib/schema';
+import { eq, ilike, and, sql } from 'drizzle-orm';
+
+/**
+ * GET /api/users
+ * Retrieve all users with optional filters for report_status and name
+ * Query params:
+ * - report_status: Filter by report status (PENDING or DONE)
+ * - name: Filter by name (case-insensitive partial match)
+ */
+export async function GET(request) {
+    try {
+        const { searchParams } = new URL(request.url);
+        const reportStatus = searchParams.get('report_status');
+        const nameFilter = searchParams.get('name');
+
+        // Build filter conditions
+        const conditions = [];
+
+        if (reportStatus) {
+            // Validate report_status value
+            if (!['PENDING', 'DONE'].includes(reportStatus.toUpperCase())) {
+                return NextResponse.json({
+                    status: 'error',
+                    message: 'Invalid report_status value. Must be PENDING or DONE',
+                    timestamp: new Date().toISOString(),
+                }, { status: 400 });
+            }
+            conditions.push(eq(users.report_status, reportStatus.toUpperCase()));
+        }
+
+        if (nameFilter) {
+            // Use sql template for case-insensitive partial matching
+            conditions.push(sql`${users.name} ILIKE ${`%${nameFilter}%`}`);
+        }
+
+        // Query database with filters
+        let result;
+        if (conditions.length > 0) {
+            result = await db.select().from(users).where(and(...conditions));
+        } else {
+            result = await db.select().from(users);
+        }
+
+        return NextResponse.json({
+            status: 'success',
+            message: 'Users retrieved successfully',
+            data: result,
+            count: result.length,
+            filters: {
+                report_status: reportStatus || null,
+                name: nameFilter || null,
+            },
+            timestamp: new Date().toISOString(),
+        }, { status: 200 });
+
+    } catch (error) {
+        console.error('Error retrieving users:', error);
+
+        return NextResponse.json({
+            status: 'error',
+            message: 'Failed to retrieve users',
+            error: error.message,
+            timestamp: new Date().toISOString(),
+        }, { status: 500 });
+    }
+}
 
 /**
  * POST /api/users
