@@ -5,8 +5,11 @@ import { useState } from "react";
 
 export default function Home() {
   const [loader, setLoader] = useState(false);
-  const handlePassData = (isSuccess, payload) => {
+  const handlePassData = async (isSuccess, payload) => {
     console.log("payload", payload);
+    setLoader(true);
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    setLoader(false);
   };
 
   return (
@@ -263,23 +266,33 @@ export default function Home() {
         // }
       `}</style>
       <div className="flex min-h-screen items-center justify-center  font-sans">
-        <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between px-4 sm:items-start">
-          <CommonInput
-            text="Enter your birth details"
-            passdata={handlePassData}
-            isLoading={loader}
-            disableAutoScroll
-            data={{
-              name: "Enter Your Full Name", // label override (optional)
-              date: "Select Your Birth Date", // label override (optional)
-              place: "Select Your Birth Place", // label override (optional)
-              button: "Click", // button text override (optional)
-              loadingButton: "Generating...", // loading text
-            }}
-            // headerBg='bg-gradient-to-r from-orange-400 to-pink-400'
-            headerBg="bg-gradient-to-r from-[#9b7bdb] to-[#120c3f]"
-            color="bg-gradient-to-r from-orange-400 to-pink-400"
-          />
+        <main className=" flex min-h-screen w-full flex-col items-center justify-between px-4 gap-4">
+          <header className="flex flex-col items-center gap-2">
+            <div className="text-4xl sm:text-5xl md:text-5xl font-ptsans-black  text-white text-center">
+              Welcome To Vedic Rishi Inaugration
+            </div>
+            <div className="text-zinc-300 text-center">
+              Please fill this form to get goodies
+            </div>
+          </header>
+          <div className="w-full max-w-3xl">
+            <CommonInput
+              text="Enter your birth details"
+              passdata={handlePassData}
+              isLoading={loader}
+              disableAutoScroll
+              data={{
+                name: "Enter Your Full Name", // label override (optional)
+                date: "Select Your Birth Date", // label override (optional)
+                place: "Select Your Birth Place", // label override (optional)
+                button: "Click", // button text override (optional)
+                loadingButton: "Generating...", // loading text
+              }}
+              // headerBg='bg-gradient-to-r from-orange-400 to-pink-400'
+              headerBg="bg-gradient-to-r from-[#9b7bdb] to-[#120c3f]"
+              color="bg-gradient-to-r from-orange-400 to-pink-400"
+            />
+          </div>
         </main>
       </div>
     </>
