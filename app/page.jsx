@@ -6,10 +6,73 @@ import { useState } from "react";
 export default function Home() {
   const [loader, setLoader] = useState(false);
   const handlePassData = async (isSuccess, payload) => {
-    console.log("payload", payload);
+    const {
+      name,
+      email,
+      birth: birthPlace,
+      day,
+      month,
+      year,
+      min: minute,
+      hour,
+      language,
+      gender,
+      tzone,
+      lat,
+      lon,
+      country,
+      place,
+      contact,
+    } = payload;
+
     setLoader(true);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    setLoader(false);
+
+    try {
+      const response = await fetch('/api/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          birthPlace,
+          day,
+          month,
+          year,
+          minute,
+          hour,
+          language,
+          gender,
+          tzone,
+          lat,
+          lon,
+          country,
+          place,
+          contact,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        // Handle validation errors or other API errors
+        console.error('API Error:', data);
+        alert(`Error: ${data.message || 'Failed to submit data'}`);
+        setLoader(false);
+        return;
+      }
+
+      // Success
+      console.log('User created successfully:', data);
+      alert('User created successfully!');
+
+    } catch (error) {
+      console.error('Network or unexpected error:', error);
+      alert('Failed to submit data. Please try again.');
+    } finally {
+      setLoader(false);
+    }
   };
 
   return (
