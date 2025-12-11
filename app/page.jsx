@@ -2,15 +2,33 @@
 import CommonInput from "@/components/CommonInput";
 import PortalLayout from "@/components/PortalLayout";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+import SuccessPopup from "../components/SuccessPopup";
 
 export default function Home() {
   const [loader, setLoader] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [formKey, setFormKey] = useState(0);
+  const router = useRouter();
+
   const handlePassData = async (isSuccess, payload) => {
     if (!isSuccess) return;
     console.log("payload", payload);
     setLoader(true);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    setLoader(false);
+    // await new Promise((resolve) => setTimeout(resolve, 2000));
+    // router.push("/report");
+    setTimeout(() => {
+      setLoader(false);
+      setShowSuccess(true);
+    }, 2000);
+  };
+
+  const handlePopupClose = () => {
+    localStorage.removeItem("user");
+    setFormKey((prev) => prev + 1);
+    setShowSuccess(false);
+    // router.push("/report"); // Uncomment when report page is ready or desired
   };
 
   return (
@@ -278,6 +296,7 @@ export default function Home() {
           </header>
           <div className="w-full max-w-3xl">
             <CommonInput
+              key={formKey}
               text="Enter your birth details"
               passdata={handlePassData}
               isLoading={loader}
@@ -296,6 +315,11 @@ export default function Home() {
           </div>
         </main>
       </div>
+      <SuccessPopup
+        isOpen={showSuccess}
+        onClose={handlePopupClose}
+        message="Your request has been processed successfully. We will get back to you shortly."
+      />
     </>
   );
 }
