@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { users } from '@/lib/schema';
-import { eq, ilike, and } from 'drizzle-orm';
+import { eq, ilike, and, sql } from 'drizzle-orm';
 
 /**
  * GET /api/users
@@ -32,8 +32,8 @@ export async function GET(request) {
         }
 
         if (nameFilter) {
-            // Use ILIKE for case-insensitive partial matching
-            conditions.push(ilike(users.name, `%${nameFilter}%`));
+            // Use sql template for case-insensitive partial matching
+            conditions.push(sql`${users.name} ILIKE ${`%${nameFilter}%`}`);
         }
 
         // Query database with filters
