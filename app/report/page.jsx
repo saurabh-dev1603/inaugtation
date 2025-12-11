@@ -111,7 +111,7 @@ export default function ReportPage() {
         className="w-full max-w-8xl mb-8 text-center"
       >
         <h1 className="text-4xl md:text-5xl font-ptsans-bold text-white mb-2">
-          Submitted Reports
+          Inaugration Leads
         </h1>
         <p className="text-zinc-300 text-lg">List of all user submissions</p>
       </motion.div>

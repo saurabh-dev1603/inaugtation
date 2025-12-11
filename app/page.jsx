@@ -339,13 +339,14 @@ export default function Home() {
         // }
       `}</style>
       <div className="flex min-h-screen items-center justify-center  font-sans">
-        <main className=" flex min-h-screen w-full flex-col items-center justify-between px-4 gap-12 md:gap-8">
-          <header className="flex flex-col items-center gap-4 md:gap-8">
+        <main className=" flex min-h-screen w-full flex-col items-center justify-between px-4 gap-12 md:gap-16">
+          <header className="flex flex-col items-center gap-4 md:gap-6">
             <div className="text-4xl sm:text-5xl md:text-5xl font-ptsans-black  text-white text-center">
-              Welcome To Vedic Rishi Inaugration
+              Welcome to Vedic Rishi Inauguration
             </div>
             <div className="text-zinc-300 text-center text-lg md:text-xl">
-              Please fill this form to get goodies
+              Please fill this form to get detailed and personalised
+              astrological reports.
             </div>
           </header>
           <div className="w-full max-w-3xl">

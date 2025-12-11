@@ -6,8 +6,8 @@ import { CheckCircle, X } from "lucide-react";
 export default function SuccessPopup({
   isOpen,
   onClose,
-  title = "Congratulations!",
-  message = "Your details have been successfully submitted.",
+  title = "Thank you!",
+  message = "Your report awaits you inside your goodie bag.",
 }) {
   return (
     <AnimatePresence>
