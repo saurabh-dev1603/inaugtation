@@ -1,0 +1,300 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme {
+  --font-sans: open_sans_regular, sans-serif;
+  --font-serif: open_sans_regular, sans-serif;
+  --font-ptsans: open_sans_regular, sans-serif;
+  --font-ptsans-bold: open_sans_bold, sans-serif;
+  --font-ptsans-medium: open_sans_medium, sans-serif;
+  --font-ptsans-black: open_sans_black, sans-serif;
+  --font-ptsans-light: open_sans_light, sans-serif;
+  --font-ptsans-regular: open_sans_regular, sans-serif;
+  --font-laila: laila, sans-serif;
+  --font-laila-medium: laila_medium, sans-serif;
+  --font-laila-semibold: laila_semibold, sans-serif;
+  --font-laila-bold: laila_bold, sans-serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer base {
+  @font-face {
+    font-family: "laila";
+    font-style: normal;
+    font-weight: normal;
+    font-display: swap;
+    src: url("/fonts/Laila-Regular.ttf");
+  }
+
+  @font-face {
+    font-family: "laila_medium";
+    font-style: normal;
+    font-weight: normal;
+    font-display: swap;
+    src: url("/fonts/Laila-Medium.ttf");
+  }
+
+  @font-face {
+    font-family: "laila_semibold";
+    font-style: normal;
+    font-display: swap;
+    font-weight: normal;
+    src: url("/fonts/Laila-SemiBold.ttf");
+  }
+
+  @font-face {
+    font-family: "laila_bold";
+    font-display: swap;
+    font-style: normal;
+    font-weight: normal;
+    src: url("/fonts/Laila-Bold.ttf");
+  }
+
+  @font-face {
+    font-family: "open_sans_light";
+    font-style: normal;
+    font-weight: normal;
+    font-display: swap;
+    src: url("/fonts/OpenSans-Light.ttf");
+  }
+
+  @font-face {
+    font-family: "open_sans_regular";
+    font-style: normal;
+    font-weight: normal;
+    font-display: swap;
+    src: url("/fonts/OpenSans-Regular.ttf");
+  }
+
+  @font-face {
+    font-family: "open_sans_medium";
+    font-style: normal;
+    font-display: swap;
+    font-weight: normal;
+    src: url("/fonts/OpenSans-Medium.ttf");
+  }
+
+  @font-face {
+    font-family: "open_sans_bold";
+    font-display: swap;
+    font-style: normal;
+    font-weight: normal;
+    src: url("/fonts/OpenSans-Bold.ttf");
+  }
+
+  @font-face {
+    font-family: "open_sans_black";
+    font-style: normal;
+    font-display: swap;
+    font-weight: normal;
+    src: url("/fonts/OpenSans-ExtraBold.ttf");
+  }
+
+  @font-face {
+    font-family: "astrosign";
+    font-style: normal;
+    font-display: swap;
+    font-weight: normal;
+    src: url("/fonts/Astrodotbasic-ow3Pd.woff2") format("woff2"),
+      url("/fonts/Astrodotbasic-ow3Pd.ttf");
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: "open_sans_bold", sans-serif;
+  }
+
+  h4,
+  h5,
+  h6 {
+    font-family: "open_sans_medium", sans-serif;
+  }
+
+  p {
+    @apply text-zinc-700;
+  }
+
+  .box-input {
+    @apply w-full py-2 ease-in duration-100 border-[#a3a3a3] focus:border-[#fff] bg-[#000417] outline-none px-2 rounded-lg text-white border-2;
+  }
+
+  .box-input-dark {
+    @apply w-full py-2 ease-in duration-100 outline-none px-2 rounded-lg text-white border-2;
+  }
+
+  .box-input-dark {
+    background: color-mix(in oklab, white 5%, transparent);
+    border: 1px solid color-mix(in oklab, white 10%, transparent);
+    color: white;
+  }
+
+  .border-red-500 {
+    border: 2px solid #ef4444 !important;
+    border-color: #ef4444 !important;
+  }
+
+  .box-input.border-red-500,
+  .box-input-dark.border-red-500,
+  input.border-red-500,
+  select.border-red-500 {
+    border: 2px solid #ef4444 !important;
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.3) !important;
+  }
+
+  /* Ensure red border overrides inline styles */
+  .input.input-error,
+  input.input-error,
+  select.input-error {
+    border: 2px solid #ef4444 !important;
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.3) !important;
+  }
+
+  .large {
+    @apply md:text-5xl text-4xl;
+  }
+
+  .medium {
+    @apply md:text-3xl text-2xl;
+  }
+
+  .small {
+    @apply md:text-xl text-lg;
+  }
+
+  .button-text {
+    @apply md:text-2xl text-xl;
+  }
+
+  .input {
+    @apply border-2 p-2 rounded-md focus:invalid:border-red-500 focus:border-black focus:outline-none border-gray-200;
+  }
+
+  .input {
+    border: 2px solid #a3a3a3;
+    color: #454545;
+  }
+
+  .inputbox,
+  .inputbox2 {
+    display: flex;
+    flex-grow: 1;
+    flex: 1;
+    min-width: 0;
+    flex-direction: column;
+    gap: 2px;
+    width: 100%;
+  }
+
+  .inputbox2 {
+    flex: 2;
+  }
+
+  label {
+    color: rgb(57, 57, 57);
+    font-weight: bolder;
+  }
+
+  .radio-button {
+    width: 80px;
+    position: relative;
+  }
+
+  .form-control {
+    background-color: transparent;
+    /*border: 2px solid #a3a3a3;*/
+    border-radius: 7px;
+    color: currentColor;
+    padding: 6px 13px;
+    width: 100%;
+  }
+
+  .form-control:focus {
+    border-color: black;
+    outline: none;
+  }
+
+  select {
+    background: white;
+    -webkit-appearance: none;
+    appearance: none;
+    -moz-appearance: none;
+    color: #e2e2e2;
+    background-image: url("data:image/svg+xml;utf8,<svg width='20px' height='20px' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='gray'><path fillRule='evenodd' d='M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z' clipRule='evenodd' /></svg>");
+    background-repeat: no-repeat;
+    background-position-x: 90%;
+    background-position-y: 50%;
+    border-radius: 8px;
+    padding: 0.5em;
+    border: 2px solid #a3a3a3;
+  }
+
+  div > p,
+  h6 > p,
+  h3 > p,
+  h4 > p,
+  p > p {
+    @apply text-current;
+  }
+
+  /* Moving gradient border animation for form */
+  .animate-border {
+    position: relative;
+  }
+
+  .animate-border::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 12px;
+    background-size: 300% 300%;
+    animation: movingGradient 4s linear infinite;
+    z-index: -1;
+  }
+
+  @keyframes movingGradient {
+    0% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  @keyframes bounce-slow {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+
+  .animate-bounce-slow {
+    animation: bounce-slow 2.5s ease-in-out infinite;
+  }
+}
