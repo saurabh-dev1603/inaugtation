@@ -138,9 +138,9 @@ export default function CommonInput(props) {
     if (!values.name) {
       error.name = "*required";
     }
-    if (!values.email) {
-      error.email = "*required";
-    }
+    // if (!values.email) {
+    //   error.email = "*required";
+    // }
     if (values.hour === "" || isNaN(values.hour) || values.hour === null) {
       error.hour = "*required";
     }

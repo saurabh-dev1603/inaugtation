@@ -6,6 +6,7 @@ import { useState } from "react";
 export default function Home() {
   const [loader, setLoader] = useState(false);
   const handlePassData = async (isSuccess, payload) => {
+    if (!isSuccess) return;
     console.log("payload", payload);
     setLoader(true);
     await new Promise((resolve) => setTimeout(resolve, 2000));
